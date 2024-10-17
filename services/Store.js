@@ -3,17 +3,13 @@ const Store = {
     cart: []
 }
 
-const proxiedStore = new Proxy(Store , {
-    // implement trap for set
-    set(target, property, value)
-    {
+const proxiedStore = new Proxy(Store, {
+    set(target, property, value) {
         target[property] = value;
-        if(property == "menu")
-        {
+        if (property=="menu") {
             window.dispatchEvent(new Event("appmenuchange"));
         }
-        if(property == "cart")
-        {
+        if (property=="cart") {
             window.dispatchEvent(new Event("appcartchange"));
         }
         return true;
